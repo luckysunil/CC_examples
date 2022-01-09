@@ -1,0 +1,10 @@
+{
+ "namespace": "sample.avro",
+ "type": "record",
+ "name": "SampleRecordName",
+ "fields": [
+     {"name": "sample_string", "type": "string"},
+     {"name": "sample_int_union",  "type": ["int", "null"]},
+     {"name": "sample_string_union", "type": ["string", "null"]}
+ ]
+}
