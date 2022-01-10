@@ -4,7 +4,10 @@
  "name": "SampleRecordName",
  "fields": [
      {"name": "sample_string", "type": "string"},
-     {"name": "sample_int_union",  "type": ["int", "null"]},
-     {"name": "sample_string_union", "type": ["string", "null"]}
+     {"name": "sample_int",  "type": "int"},
+     {"name": "sample_float",  "type": "float"},
+     {"name": "sample_boolean",  "type": "boolean"},
+     {"name": "sample_string_union", "type": ["string", "null"]},
+     {"name": "sample_int_union",  "type": ["int", "null"]}
  ]
 }
