@@ -23,7 +23,7 @@ if __name__ == '__main__':
     config_data = {
                     'client.id':'consumer-cg1-c1', #Client Identifier
 
-                    'bootstrap.servers':'pkc-41p56.asia-south1.gcp.confluent.cloud:9092', # Add the Bootstrap server info from Confluent Cloud
+                    'bootstrap.servers':'<BOOTSTRAP SERVER URL>', # Add the Bootstrap server info from Confluent Cloud
                     'security.protocol':'SASL_SSL',
                     'sasl.mechanisms':'PLAIN',
                     'sasl.username':'<ADD CLUSTER API KEY>', # Add Cluster API Key
