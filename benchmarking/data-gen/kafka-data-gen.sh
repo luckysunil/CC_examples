@@ -2,12 +2,11 @@
 
 bootstrap_server=pkc-l7pr2.ap-south-1.aws.confluent.cloud:9092
 topic_name=perf-test-topic
-partitions=3
+partitions=1
 msgbytes=5120
-num_records=100000 #Total records to be produced
-throughput=50 #50 Mbps
+num_records=1000000 #Total records to be produced
+throughput=-1 #No throttling
 
-echo "Producer Properties:"
 # acks: 0,1,all
 acks_value=all
 
@@ -29,4 +28,4 @@ sleep 1
 
 sleep 1
 
-./kafka-producer-perf-test --topic $topic_name --record-size $msgbytes --producer.config client.config --throughput $throughput --num-records $num_records --producer-props acks=$acks_value linger.ms=$linger_ms compression.type=$compression_type --print-metrics
+./kafka-producer-perf-test --topic $topic_name --record-size $msgbytes --producer.config client.config --throughput $throughput --num-records $num_records --producer-props acks=$acks_value linger.ms=$linger_ms compression.type=$compression_type
