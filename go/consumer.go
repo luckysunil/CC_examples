@@ -14,8 +14,8 @@ import (
 func main() {
 
   mechanism := plain.Mechanism{
-      Username: "AHZ2FDERNXU5MLKG",
-      Password: "szv19A1hDe3M1hIfEZcK+epZfGUR9UX9q+vbdJbPhatWAG9MddWGg5ivtA5xyyET",
+      Username: "IVB532DYA7CGGHTG",
+      Password: "3j36pflBRfJtoQpQIH3hEtgAE7miFuirzMhwNLOrOfO98HL4Ls1gePg1mRDT1CpB",
   }
 
   dialer := &kafka.Dialer{
@@ -27,7 +27,7 @@ func main() {
 
   r := kafka.NewReader(kafka.ReaderConfig{
     Brokers:   []string{"pkc-l7pr2.ap-south-1.aws.confluent.cloud:9092"},
-    Topic:     "test-go",
+    Topic:     "perf-test-topic",
     QueueCapacity: 10000,
     MinBytes:  1, // 10KB
     MaxBytes:  10e6, // 10MB
@@ -50,7 +50,7 @@ func main() {
       fmt.Println("Something incorrect here")
       break;
     }
-		//fmt.Printf("message at topic:%v partition:%v offset:%v	msg: %s\n", m.Topic, m.Partition, m.Offset, string(m.Value))
+		fmt.Printf("message at topic:%v partition:%v offset:%v	msg: %s\n", m.Topic, m.Partition, m.Offset, string(m.Value))
 
     lag, err := r.ReadLag(context.Background())
     //fmt.Println("lag: %d", lag)
