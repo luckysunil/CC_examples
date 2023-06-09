@@ -12,6 +12,10 @@ import (
 )
 
 func main() {
+	 var target_records uint32
+	 var counter uint32
+
+	 target_records = 1000000
 
   mechanism := plain.Mechanism{
       Username: "IVB532DYA7CGGHTG",
@@ -27,14 +31,17 @@ func main() {
 
   r := kafka.NewReader(kafka.ReaderConfig{
     Brokers:   []string{"pkc-l7pr2.ap-south-1.aws.confluent.cloud:9092"},
-    Topic:     "perf-test-topic",
-    QueueCapacity: 10000,
-    MinBytes:  1, // 10KB
+    Topic:     "perf-test-topic2",
+    QueueCapacity: 1000,
+    MinBytes:  10e4, // 10KB
     MaxBytes:  10e6, // 10MB
+    MaxWait:  1 * time.Second,
     CommitInterval: time.Second,
     WatchPartitionChanges: true,
     Dialer:         dialer,
   })
+
+  r.SetOffset(0)
 
   defer r.Close()
 
@@ -42,25 +49,21 @@ func main() {
 
   startTime := time.Now()
   for {
-		m, err := r.ReadMessage(context.Background())
-		if err != nil {
-			log.Fatalln(err)
-		}
-    if m.Offset == -1 {
-      fmt.Println("Something incorrect here")
-      break;
-    }
-		fmt.Printf("message at topic:%v partition:%v offset:%v	msg: %s\n", m.Topic, m.Partition, m.Offset, string(m.Value))
-
-    lag, err := r.ReadLag(context.Background())
-    //fmt.Println("lag: %d", lag)
-
-    if (lag == 0) {
-      fmt.Println("All records read")
-      break;
-    }
+	m, err := r.ReadMessage(context.Background())
+	if err != nil {
+		log.Fatalln(err)
 	}
+	counter++
+
+	fmt.Printf("counter:%v  message at topic:%v partition:%v offset:%v \n", counter, m.Topic, m.Partition, m.Offset)
+
+	if counter  == target_records {
+		fmt.Println("Target Records Read: ", target_records)
+		break;
+	}
+	}
+
   endTime := time.Now()
   diff := endTime.Sub(startTime)
-  fmt.Println(diff.Seconds())
+  fmt.Println("Time Taken in Seconds", diff.Seconds())
 }
