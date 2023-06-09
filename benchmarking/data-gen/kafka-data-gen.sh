@@ -9,7 +9,7 @@ throughput=50 #50 Mbps
 
 echo "Producer Properties:"
 # acks: 0,1,all
-acks_value=(all)
+acks_value=all
 
 # batch.size: 100000–200000
 batch_size=16384
@@ -29,4 +29,4 @@ sleep 1
 
 sleep 1
 
-./kafka-producer-perf-test --topic $topic_name --record-size $msgbytes --producer.config client.config --throughput $throughput --num-records $num_records --producer-props acks=$a linger.ms=$linger_ms compression.type=$compression_type --print-metrics
+./kafka-producer-perf-test --topic $topic_name --record-size $msgbytes --producer.config client.config --throughput $throughput --num-records $num_records --producer-props acks=$acks_value linger.ms=$linger_ms compression.type=$compression_type --print-metrics
