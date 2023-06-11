@@ -32,7 +32,8 @@ func main() {
   r := kafka.NewReader(kafka.ReaderConfig{
     Brokers:   []string{"pkc-l7pr2.ap-south-1.aws.confluent.cloud:9092"},
     GroupID:   "consumer-group-id", // To read from all partitions of topic
-    Topic:     "perf-test-topic2",
+    GroupTopics:   []string{"t3","t2","t1"},
+    //Topic:     "perf-test-topic2",
     QueueCapacity: 10000,
     MinBytes:  100000, // 10KB
     MaxBytes:  10e6, // 10MB
