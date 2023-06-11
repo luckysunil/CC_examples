@@ -31,17 +31,17 @@ func main() {
 
   r := kafka.NewReader(kafka.ReaderConfig{
     Brokers:   []string{"pkc-l7pr2.ap-south-1.aws.confluent.cloud:9092"},
+    GroupID:   "consumer-group-id", // To read from all partitions of topic
     Topic:     "perf-test-topic2",
-    QueueCapacity: 1000,
-    MinBytes:  10e4, // 10KB
+    QueueCapacity: 10000,
+    MinBytes:  100000, // 10KB
     MaxBytes:  10e6, // 10MB
-    MaxWait:  1 * time.Second,
-    CommitInterval: time.Second,
+    MaxWait:  time.Second,
+    CommitInterval: 2*time.Second,
+    StartOffset: kafka.FirstOffset,
     WatchPartitionChanges: true,
     Dialer:         dialer,
   })
-
-  r.SetOffset(0)
 
   defer r.Close()
 
