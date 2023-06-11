@@ -34,13 +34,13 @@ do
   echo "$topic_name"
   echo "*********************"
 
-  topic_list+=$topic_name","
+  topic_list+="\""$topic_name"\","
 
   ./kafka-topics --bootstrap-server $bootstrap_server  --command-config client.config --topic $topic_name --delete
 
   sleep 1
 
-  ./kafka-topics  --bootstrap-server $bootstrap_server   --command-config client.config --create --topic $topic_name --partitions $partitions --replication-factor 3
+  ./kafka-topics  --bootstrap-server $bootstrap_server   --command-config client.config --create --topic $topic_name --partitions $partitions_per_topic --replication-factor 3
 
   sleep 1
 
