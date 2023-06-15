@@ -35,7 +35,7 @@ func main() {
     GroupTopics:   []string{"t3","t2","t1"},
     //Topic:     "perf-test-topic2",
     QueueCapacity: 10000,
-    MinBytes:  100000, // 10KB
+    MinBytes:  100000, // 100KB
     MaxBytes:  10e6, // 10MB
     MaxWait:  time.Second,
     CommitInterval: 2*time.Second,
